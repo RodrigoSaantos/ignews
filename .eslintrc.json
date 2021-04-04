@@ -41,6 +41,7 @@
       "react/react-in-jsx-scope": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "consistent-return": "off",
+      "no-restricted-syntax": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
