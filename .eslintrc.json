@@ -42,6 +42,7 @@
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "consistent-return": "off",
       "no-restricted-syntax": "off",
+      "no-case-declarations": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
