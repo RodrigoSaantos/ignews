@@ -1,12 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Session } from 'next-auth';
-import { useSession } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/client';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import { RichText } from 'prismic-dom';
 import { useEffect } from 'react';
+import { api } from '../../../services/api';
 import { getPrismicClient } from '../../../services/prismic';
+import { getStripeJs } from '../../../services/stripe-js';
 import styles from '../post.module.scss';
 
 interface PostPreviewProps {
@@ -32,6 +34,31 @@ export default function PostPreview({ post }: PostPreviewProps) {
       router.push(`/posts/${post.slug}`);
     }
   }, [newSession, post.slug, router]);
+
+  async function handleSubscribe() {
+    if (!session) {
+      signIn('github');
+      return;
+    }
+
+    if (newSession.activeSubscription) {
+      router.push(`/posts/${post.slug}`);
+
+      return;
+    }
+
+    try {
+      const response = await api.post('/subscribe');
+
+      const { sessionId } = response.data;
+
+      const stripe = await getStripeJs();
+
+      await stripe.redirectToCheckout({ sessionId });
+    } catch (err) {
+      alert(err.message);
+    }
+  }
   return (
     <>
       <Head>
@@ -48,7 +75,11 @@ export default function PostPreview({ post }: PostPreviewProps) {
           />
 
           <Link href="/">
-            <button type="button" className={styles.continueReading}>
+            <button
+              type="button"
+              className={styles.continueReading}
+              onClick={handleSubscribe}
+            >
               Wanna continue reading?
               <a>Subscribe now 🤗</a>
             </button>
