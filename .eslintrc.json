@@ -44,6 +44,7 @@
       "no-restricted-syntax": "off",
       "no-case-declarations": "off",
       "jsx-a11y/anchor-is-valid": "off",
+      "import/no-extraneous-dependencies": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
