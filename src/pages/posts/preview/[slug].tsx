@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Session } from 'next-auth';
 import { signIn, useSession } from 'next-auth/client';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import { RichText } from 'prismic-dom';
