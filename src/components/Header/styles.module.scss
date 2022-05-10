@@ -27,7 +27,7 @@
 
       transition: color 0.2s;
 
-      & + a {
+      &+a {
         margin-left: 2rem;
       }
 
@@ -51,5 +51,9 @@
         background: var(--yellow500);
       }
     }
+  }
+
+  button {
+    margin-left: auto;
   }
 }
