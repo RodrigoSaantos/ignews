@@ -12,11 +12,6 @@ export default NextAuth({
       authorization: "https://github.com/login/oauth/authorize?scope=read:user"
     }),
   ],
-
-  jwt: {
-    signingKey: process.env.SIGNING_KEY,
-  },
-
   callbacks: {
     async signIn({ user, account, profile }) {
       const { email } = user;
