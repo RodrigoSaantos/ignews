@@ -23,9 +23,9 @@ describe('Home page', () => {
   });
 
   it('loads initial data', async () => {
-    const retriveStripePricesMocked = jest.mocked(stripe.prices.retrieve);
+    const retrieveStripePricesMocked = jest.mocked(stripe.prices.retrieve);
 
-    retriveStripePricesMocked.mockResolvedValueOnce({
+    retrieveStripePricesMocked.mockResolvedValueOnce({
       id: 'fake-price-id',
       unit_amount: 1000,
     } as any);
